@@ -1,0 +1,368 @@
+@prefix : <http://www.riderserver.org/jrsmi/ontologies/2020/11/movie-ontology-33#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix cinema-blockchain: <http://localhost/ontology/CS407/cinema-blockchain#> .
+@base <http://www.riderserver.org/jrsmi/ontologies/2020/11/movie-ontology.owl> .
+
+<http://www.riderserver.org/jrsmi/ontologies/2020/11/movie-ontology.owl> rdf:type owl:Ontology ;
+                                                                          <http://purl.org/dc.elements/1.1/Title> "Movie Ontology"@en ;
+                                                                          :Creator "Jason Smith" ;
+                                                                          :Email "jrs@my.ccsu.edu"^^xsd:string .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc.elements/1.1/Title
+<http://purl.org/dc.elements/1.1/Title> rdf:type owl:AnnotationProperty ;
+                                        rdfs:subPropertyOf dc:title .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/type
+dc:type rdf:type owl:AnnotationProperty .
+
+
+###  http://www.riderserver.org/jrsmi/ontologies/2020/11/movie-ontology-33#Creator
+:Creator rdf:type owl:AnnotationProperty .
+
+
+###  http://www.riderserver.org/jrsmi/ontologies/2020/11/movie-ontology-33#Email
+:Email rdf:type owl:AnnotationProperty ;
+       rdfs:subPropertyOf :Creator .
+
+
+###  http://www.riderserver.org/jrsmi/ontologies/2020/11/movie-ontology.owl#Type(dcterms:type)
+<http://www.riderserver.org/jrsmi/ontologies/2020/11/movie-ontology.owl#Type(dcterms:type)> rdf:type owl:AnnotationProperty ;
+                                                                                            rdfs:subPropertyOf dc:type .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Film
+cinema-blockchain:Film rdf:type owl:ObjectProperty .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Has_Actor
+cinema-blockchain:Has_Actor rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf cinema-blockchain:Film .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Has_Director
+cinema-blockchain:Has_Director rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf cinema-blockchain:Film .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Has_Producer
+cinema-blockchain:Has_Producer rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf cinema-blockchain:Film .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Has_Writer
+cinema-blockchain:Has_Writer rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf cinema-blockchain:Film .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://localhost/ontology/CS407/cinema-blockchain#IMDB_Rating
+cinema-blockchain:IMDB_Rating rdf:type owl:DatatypeProperty ;
+                              rdfs:domain cinema-blockchain:Film ;
+                              rdfs:range xsd:double ;
+                              rdfs:isDefinedBy cinema-blockchain:cinema-blockchain.owl ;
+                              rdfs:label "IMDB Rating"@en .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Release_Year
+cinema-blockchain:Release_Year rdf:type owl:DatatypeProperty ;
+                               rdfs:domain cinema-blockchain:Film_Release ;
+                               rdfs:range xsd:dateTime ;
+                               rdfs:isDefinedBy cinema-blockchain:cinema-blockchain.owl ;
+                               rdfs:label "Release Date"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Action
+cinema-blockchain:Action rdf:type owl:Class ;
+                         rdfs:subClassOf cinema-blockchain:Genre ;
+                         owl:disjointWith cinema-blockchain:Crime ,
+                                          cinema-blockchain:Musical .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Actor
+cinema-blockchain:Actor rdf:type owl:Class ;
+                        rdfs:subClassOf <http://purl.org/dc.elements/1.1/Person> .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Crime
+cinema-blockchain:Crime rdf:type owl:Class ;
+                        rdfs:subClassOf cinema-blockchain:Genre .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Director
+cinema-blockchain:Director rdf:type owl:Class ;
+                           rdfs:subClassOf <http://purl.org/dc.elements/1.1/Person> .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Film
+cinema-blockchain:Film rdf:type owl:Class .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Film_Release
+cinema-blockchain:Film_Release rdf:type owl:Class .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Genre
+cinema-blockchain:Genre rdf:type owl:Class .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Musical
+cinema-blockchain:Musical rdf:type owl:Class ;
+                          rdfs:subClassOf cinema-blockchain:Genre .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Producer
+cinema-blockchain:Producer rdf:type owl:Class ;
+                           rdfs:subClassOf <http://purl.org/dc.elements/1.1/Person> .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Writer
+cinema-blockchain:Writer rdf:type owl:Class ;
+                         rdfs:subClassOf <http://purl.org/dc.elements/1.1/Person> .
+
+
+###  http://purl.org/dc.elements/1.1/Person
+<http://purl.org/dc.elements/1.1/Person> rdf:type owl:Class ;
+                                         rdfs:subClassOf cinema-blockchain:Film ;
+                                         dc:description "Actors, Directors, Producers, and ect."@en ;
+                                         rdfs:comment "A person a human" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person_Emma_Stone
+cinema-blockchain:Person_Emma_Stone rdf:type owl:NamedIndividual ,
+                                             cinema-blockchain:Actor .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person_Roderick_Thorp
+cinema-blockchain:Person_Roderick_Thorp rdf:type owl:NamedIndividual ,
+                                                 cinema-blockchain:Writer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#cinema-blockchain.owl
+cinema-blockchain:cinema-blockchain.owl rdf:type owl:NamedIndividual ,
+                                                 owl:Thing .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Film:_Die_Hard
+cinema-blockchain:Film:_Die_Hard rdf:type owl:NamedIndividual ,
+                                          cinema-blockchain:Action ,
+                                          cinema-blockchain:Crime ;
+                                 cinema-blockchain:Has_Actor cinema-blockchain:Person:_Bonnie_Bedelia ,
+                                                             cinema-blockchain:Person:_Bruce_Willis ;
+                                 cinema-blockchain:Has_Director cinema-blockchain:Person:_John_McTieran ;
+                                 cinema-blockchain:Has_Producer cinema-blockchain:Person:_Charles_Gordon ;
+                                 cinema-blockchain:IMDB_Rating "8.2"@en ;
+                                 cinema-blockchain:Release_Year "20-06-1988"@en .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Film:_Don_Jon
+cinema-blockchain:Film:_Don_Jon rdf:type owl:NamedIndividual ,
+                                         cinema-blockchain:Action ,
+                                         cinema-blockchain:Film ;
+                                cinema-blockchain:Has_Actor cinema-blockchain:Person:_Joseph_Gordon ,
+                                                            cinema-blockchain:Person:_Scarlett_Johansson ;
+                                cinema-blockchain:Has_Director cinema-blockchain:Person:_Joseph_Gordon ;
+                                cinema-blockchain:Has_Producer cinema-blockchain:Person:_Ram_Bergman ;
+                                cinema-blockchain:Has_Writer cinema-blockchain:Person:_Joseph_Gordon ;
+                                cinema-blockchain:IMDB_Rating "6.5"@en ;
+                                cinema-blockchain:Release_Year "27-09-2013"@en .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Film:_John_WIck
+cinema-blockchain:Film:_John_WIck rdf:type owl:NamedIndividual ,
+                                           cinema-blockchain:Action ,
+                                           cinema-blockchain:Crime ,
+                                           cinema-blockchain:Film ;
+                                  cinema-blockchain:Has_Actor cinema-blockchain:Person:_Alfie_Allen ,
+                                                              cinema-blockchain:Person:_Keanu_Reeves ;
+                                  cinema-blockchain:Has_Director cinema-blockchain:Person:_Chad_Stahelski ;
+                                  cinema-blockchain:Has_Producer cinema-blockchain:Person:_David_Leitch ;
+                                  cinema-blockchain:Has_Writer cinema-blockchain:Person:_Derek_Kolstad ;
+                                  cinema-blockchain:IMDB_Rating "7.4"@en ;
+                                  cinema-blockchain:Release_Year "24-10-2014"@en .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Film:_La_La_Land
+cinema-blockchain:Film:_La_La_Land rdf:type owl:NamedIndividual ,
+                                            cinema-blockchain:Film ,
+                                            cinema-blockchain:Musical ;
+                                   cinema-blockchain:Has_Actor cinema-blockchain:Person_Emma_Stone ,
+                                                               cinema-blockchain:Person:_Ryan_Gosling ;
+                                   cinema-blockchain:Has_Director cinema-blockchain:Person:_Damien_Chazelle ;
+                                   cinema-blockchain:Has_Producer cinema-blockchain:Person:_Fred_Berger ;
+                                   cinema-blockchain:Has_Writer cinema-blockchain:Person:_Damien_Chazelle ;
+                                   cinema-blockchain:IMDB_Rating "8.0"@en ;
+                                   cinema-blockchain:Release_Year "25-12-2016"@en .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Film:_Uncut_Gems
+cinema-blockchain:Film:_Uncut_Gems rdf:type owl:NamedIndividual ,
+                                            cinema-blockchain:Crime ,
+                                            cinema-blockchain:Film ;
+                                   cinema-blockchain:Has_Actor cinema-blockchain:Person:_Adam_Sandler ,
+                                                               cinema-blockchain:Person:_Julia_Fox ;
+                                   cinema-blockchain:Has_Director cinema-blockchain:Person:_Benny_Safdie ;
+                                   cinema-blockchain:Has_Producer cinema-blockchain:Person:_Eli_Bush ;
+                                   cinema-blockchain:Has_Writer cinema-blockchain:Person:_Ronald_Bronstein ;
+                                   cinema-blockchain:IMDB_Rating "7.4"@en ;
+                                   cinema-blockchain:Release_Year "25-12-2019"@en .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Adam_Sandler
+cinema-blockchain:Person:_Adam_Sandler rdf:type owl:NamedIndividual ,
+                                                cinema-blockchain:Actor .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Alfie_Allen
+cinema-blockchain:Person:_Alfie_Allen rdf:type owl:NamedIndividual ,
+                                               cinema-blockchain:Actor .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Benny_Safdie
+cinema-blockchain:Person:_Benny_Safdie rdf:type owl:NamedIndividual ,
+                                                cinema-blockchain:Director .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Bonnie_Bedelia
+cinema-blockchain:Person:_Bonnie_Bedelia rdf:type owl:NamedIndividual ,
+                                                  cinema-blockchain:Actor .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Bruce_Willis
+cinema-blockchain:Person:_Bruce_Willis rdf:type owl:NamedIndividual ,
+                                                cinema-blockchain:Actor .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Chad_Stahelski
+cinema-blockchain:Person:_Chad_Stahelski rdf:type owl:NamedIndividual ,
+                                                  cinema-blockchain:Director .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Charles_Gordon
+cinema-blockchain:Person:_Charles_Gordon rdf:type owl:NamedIndividual ,
+                                                  cinema-blockchain:Producer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Damien_Chazelle
+cinema-blockchain:Person:_Damien_Chazelle rdf:type owl:NamedIndividual ,
+                                                   cinema-blockchain:Director ,
+                                                   cinema-blockchain:Writer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_David_Leitch
+cinema-blockchain:Person:_David_Leitch rdf:type owl:NamedIndividual ,
+                                                cinema-blockchain:Producer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Derek_Kolstad
+cinema-blockchain:Person:_Derek_Kolstad rdf:type owl:NamedIndividual ,
+                                                 cinema-blockchain:Writer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Eli_Bush
+cinema-blockchain:Person:_Eli_Bush rdf:type owl:NamedIndividual ,
+                                            cinema-blockchain:Producer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Fred_Berger
+cinema-blockchain:Person:_Fred_Berger rdf:type owl:NamedIndividual ,
+                                               cinema-blockchain:Producer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_John_McTieran
+cinema-blockchain:Person:_John_McTieran rdf:type owl:NamedIndividual ,
+                                                 cinema-blockchain:Director .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Joseph_Gordon
+cinema-blockchain:Person:_Joseph_Gordon rdf:type owl:NamedIndividual ,
+                                                 cinema-blockchain:Actor ,
+                                                 cinema-blockchain:Director ,
+                                                 cinema-blockchain:Writer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Julia_Fox
+cinema-blockchain:Person:_Julia_Fox rdf:type owl:NamedIndividual ,
+                                             cinema-blockchain:Actor .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Keanu_Reeves
+cinema-blockchain:Person:_Keanu_Reeves rdf:type owl:NamedIndividual ,
+                                                cinema-blockchain:Actor .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Ram_Bergman
+cinema-blockchain:Person:_Ram_Bergman rdf:type owl:NamedIndividual ,
+                                               cinema-blockchain:Producer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Ronald_Bronstein
+cinema-blockchain:Person:_Ronald_Bronstein rdf:type owl:NamedIndividual ,
+                                                    cinema-blockchain:Writer .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Ryan_Gosling
+cinema-blockchain:Person:_Ryan_Gosling rdf:type owl:NamedIndividual ,
+                                                cinema-blockchain:Actor .
+
+
+###  http://localhost/ontology/CS407/cinema-blockchain#Person:_Scarlett_Johansson
+cinema-blockchain:Person:_Scarlett_Johansson rdf:type owl:NamedIndividual ,
+                                                      cinema-blockchain:Actor .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( cinema-blockchain:Actor
+                cinema-blockchain:Director
+                cinema-blockchain:Producer
+                cinema-blockchain:Writer
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( cinema-blockchain:Film
+                cinema-blockchain:Genre
+                <http://purl.org/dc.elements/1.1/Person>
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
